@@ -1,7 +1,4 @@
-package pairmatching.domain;
-
-import pairmatching.ErrorConstants;
-import pairmatching.Level;
+package pairmatching;
 
 import java.util.Arrays;
 import java.util.EnumMap;

@@ -1,8 +1,8 @@
 package pairmatching.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pairmatching.Level;
+import pairmatching.Mission;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class MissionTest {
 
