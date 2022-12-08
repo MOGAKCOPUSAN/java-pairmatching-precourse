@@ -11,16 +11,15 @@ import java.util.List;
 
 public class CrewFileReader {
 
-    public static void backendCrewFileRead() throws IOException {
+    public static List<String> backendCrewNameFileRead() throws IOException {
         URL backendCrewsFileUrl = CrewFileReader.class.getClassLoader().getResource("backend-crew.md");
         Path backendCrewsFilePath = new File(backendCrewsFileUrl.getPath()).toPath();
-        List<String> backendCrewsName = Files.readAllLines(backendCrewsFilePath);
-        System.out.println(backendCrewsName);
+        return Files.readAllLines(backendCrewsFilePath);
     }
 
-    public static void frontendCrewFileRead() throws IOException {
+    public static List<String> frontendCrewNameFileRead() throws IOException {
         URL frontendCrewsFileUrl = CrewFileReader.class.getClassLoader().getResource("frontend-crew.md");
         Path backendCrewsFilePath = new File(frontendCrewsFileUrl.getPath()).toPath();
-        List<String> backendCrewsName = Files.readAllLines(backendCrewsFilePath);
+        return Files.readAllLines(backendCrewsFilePath);
     }
 }
