@@ -60,6 +60,10 @@ public class OutputView {
         printMessage(PAIR_MATCHING_RESULT_MESSAGE);
     }
 
+    public void printPairMatchingResult(List<String> matchedPairs) {
+        matchedPairs.forEach(this::printMessage);
+    }
+
     public void printPairRematchingMessage() {
         printMessage(PAIR_REMATCHING_MESSAGE);
         printMessage(YES_OR_NO_COMMAND_MESSAGE);
