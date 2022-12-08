@@ -17,4 +17,12 @@ public class PairMatchingRepository {
             matchingResults.put(condition, pairs);
         }
     }
+
+    public Set<Pair> findByCondition(List<String> condition) {
+        if (!matchingResults.containsKey(condition)) {
+            throw new IllegalArgumentException("해당 페어 매칭 결과가 존재하지 않습니다.");
+        }
+
+        return matchingResults.get(condition);
+    }
 }
