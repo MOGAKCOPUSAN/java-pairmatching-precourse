@@ -26,6 +26,7 @@ public class PairMatchingController {
     private static final int PROGRAM_LEVEL_INDEX = 1;
     private static final int PROGRAM_MISSION_INDEX = 2;
 
+    private String gameStatus = "start";
     private FunctionCommand functionCommand;
 
     public PairMatchingController() throws IOException {
@@ -36,7 +37,7 @@ public class PairMatchingController {
     }
 
     public void run() {
-        while (functionCommand.equals(FunctionCommand.END)) {
+        while (gameStatus.equals("end")) {
             inputFunctionCommand();
             choiceFunctionStep();
         }
