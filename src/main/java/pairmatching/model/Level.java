@@ -19,5 +19,10 @@ public enum Level {
         this.missions = missions;
     }
 
-    // 추가 기능 구현
+    public static Level missionOf(String mission) {
+        return Arrays.stream(Level.values())
+                .filter(level -> level.missions.contains(mission))
+                .findAny()
+                .orElseThrow(IllegalArgumentException::new);
+    }
 }

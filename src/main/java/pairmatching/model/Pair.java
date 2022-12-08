@@ -3,19 +3,21 @@ package pairmatching.model;
 import java.util.List;
 
 public class Pair {
-    private String mission;
     private List<Crew> crews;
+    private Level level;
 
-    public Pair(String mission, List<Crew> crews) {
-        this.mission = mission;
+    public Pair(List<Crew> crews, String mission) {
+        this.level = Level.missionOf(mission);
+        validateMatched(crews);
         this.crews = crews;
     }
 
-    @Override
-    public String toString() {
-        return "Pair{" +
-                ", mission='" + mission + '\'' +
-                ", crews=" + crews +
-                '}';
+    private void validateMatched(List<Crew> crews) {
+        for (Crew crew : crews) {
+            if (crew.isMatchedCrew(crews, level)) {
+                throw new IllegalArgumentException()
+                        ;
+            }
+        }
     }
 }
