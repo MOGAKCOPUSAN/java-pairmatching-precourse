@@ -3,12 +3,12 @@ package pairmatching.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FrontendCrews {
+public class Crews {
 
     private List<Crew> crews;
 
-    public FrontendCrews(List<Crew> frontendCrews) {
-        this.crews = frontendCrews;
+    public Crews(List<Crew> crews) {
+        this.crews = crews;
     }
 
     public List<String> getNames() {
