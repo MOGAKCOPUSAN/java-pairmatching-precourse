@@ -37,4 +37,13 @@ class PairMatchingHistoryTest {
         assertThat(expectedExists).isTrue();
         assertThat(expectedNotExists).isFalse();
     }
+
+    @Test
+    void 페어_매칭_결과_조회_기능() {
+        List<String> matchedPairs = Arrays.asList("가나 : 다라", "마바 : 사아", "자차: 카타");
+        Program program = new Program(Course.BACKEND, Level.LEVEL1, Mission.RACING_CAR);
+        List<String> findMatchedPair = pairMatchingHistory.findMatchedPair(program);
+
+        assertThat(findMatchedPair).isEqualTo(matchedPairs);
+    }
 }
