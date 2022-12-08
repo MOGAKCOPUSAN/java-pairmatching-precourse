@@ -7,7 +7,7 @@ public class OutputView {
     private static final String PAIR_FIND_COMMAND_MESSAGE = "2. 페어 조회";
     private static final String PAIR_INITIALIZE_COMMAND_MESSAGE = "3. 페어 초기화";
     private static final String END_COMMAND_MESSAGE = "Q. 종료";
-
+    private static final String FUNCTION_DELIMITER = "#############################################";
 
     public void printFunctionChoiceMessage() {
         printMessage(FUNCTION_CHOICE_MESSAGE);
@@ -18,6 +18,10 @@ public class OutputView {
         printMessage(PAIR_FIND_COMMAND_MESSAGE);
         printMessage(PAIR_INITIALIZE_COMMAND_MESSAGE);
         printMessage(END_COMMAND_MESSAGE);
+    }
+
+    public void printDelimiter() {
+        printMessage(FUNCTION_DELIMITER);
     }
 
     private void printMessage(String message) {
