@@ -37,7 +37,7 @@ public class PairMatchingController {
     }
 
     public void run() {
-        while (gameStatus.equals("end")) {
+        while (gameStatus.equals("start")) {
             inputFunctionCommand();
             choiceFunctionStep();
         }
