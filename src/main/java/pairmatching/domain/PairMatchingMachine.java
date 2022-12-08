@@ -1,6 +1,7 @@
 package pairmatching.domain;
 
 import pairmatching.Course;
+import pairmatching.Level;
 import pairmatching.Mission;
 
 import java.util.ArrayList;
@@ -13,14 +14,9 @@ public class PairMatchingMachine {
 
     private final List<String> shuffledCrewNames;
     private final List<String> matchedPairs = new ArrayList<>();
-    private final Course course;
-    private final Mission mission;
 
-    public PairMatchingMachine(List<String> shuffledCrewNames,
-                               Course course, Mission mission) {
+    public PairMatchingMachine(List<String> shuffledCrewNames) {
         this.shuffledCrewNames = shuffledCrewNames;
-        this.course = course;
-        this.mission = mission;
     }
 
     public void generate() {
