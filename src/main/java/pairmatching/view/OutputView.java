@@ -1,5 +1,9 @@
 package pairmatching.view;
 
+import pairmatching.Course;
+
+import java.util.List;
+
 public class OutputView {
 
     private static final String FUNCTION_CHOICE_MESSAGE = "기능을 선택하세요.";
@@ -7,7 +11,8 @@ public class OutputView {
     private static final String PAIR_FIND_COMMAND_MESSAGE = "2. 페어 조회";
     private static final String PAIR_INITIALIZE_COMMAND_MESSAGE = "3. 페어 초기화";
     private static final String END_COMMAND_MESSAGE = "Q. 종료";
-    private static final String FUNCTION_DELIMITER = "#############################################";
+    private static final String PRINT_FUNCTION_DELIMITER = "#############################################";
+    private static final String COURSE_JOIN_DELIMITER = " | ";
 
     public void printFunctionChoiceMessage() {
         printMessage(FUNCTION_CHOICE_MESSAGE);
@@ -21,7 +26,11 @@ public class OutputView {
     }
 
     public void printDelimiter() {
-        printMessage(FUNCTION_DELIMITER);
+        printMessage(PRINT_FUNCTION_DELIMITER);
+    }
+
+    public void printProgrammingCourse(List<String> courses) {
+        printMessage(String.join(COURSE_JOIN_DELIMITER, courses));
     }
 
     private void printMessage(String message) {
