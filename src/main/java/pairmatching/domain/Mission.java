@@ -1,5 +1,6 @@
 package pairmatching.domain;
 
+import pairmatching.ErrorConstants;
 import pairmatching.Level;
 
 import java.util.Arrays;
@@ -36,5 +37,13 @@ public enum Mission {
             missionByLevelMap.put(level, missionByLevel);
         }
         return missionByLevelMap;
+    }
+
+    public static Mission getMission(String missionName) {
+        return Arrays.stream(values())
+                .filter(value -> value.name.equals(missionName))
+                .findAny()
+                .orElseThrow(() ->
+                        new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "정확한 미션 이름을 입력해주세요."));
     }
 }
