@@ -13,6 +13,7 @@ public class OutputView {
     private static final String END_COMMAND_MESSAGE = "Q. 종료";
     private static final String PRINT_FUNCTION_DELIMITER = "#############################################";
     private static final String COURSE_JOIN_DELIMITER = " | ";
+    private static final String CHOICE_PROGRAM_MESSAGE = "과정, 레벨, 미션을 선택하세요.";
 
     public void printFunctionChoiceMessage() {
         printMessage(FUNCTION_CHOICE_MESSAGE);
@@ -31,6 +32,10 @@ public class OutputView {
 
     public void printProgrammingCourse(List<String> courses) {
         printMessage(String.join(COURSE_JOIN_DELIMITER, courses));
+    }
+
+    public void printChoiceProgramMessage() {
+        printMessage(CHOICE_PROGRAM_MESSAGE);
     }
 
     private void printMessage(String message) {
