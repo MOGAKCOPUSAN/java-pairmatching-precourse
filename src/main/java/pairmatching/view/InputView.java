@@ -41,6 +41,24 @@ public class InputView {
         printMessage(QUIT_CHOICE_MESSAGE);
     }
 
+    public List<String> readCourseAndLevelAndMission() {
+        printCourseAndMissionInputMessage();
+        String courseAndLevelAndMission = Console.readLine();
+        return Parser.getCourseAndLevelAndMission(courseAndLevelAndMission);
+    }
+
+    private void printCourseAndMissionInputMessage() {
+        printMessage(LINE_SEPARATOR_MESSAGE);
+        printMessage(COURSE_CHOICE_MESSAGE + String.join(DELIMITER, Course.getAllCourseName()));
+        printMessage(MISSION_CHOICE_MESSAGE);
+        Level.getAllLevels()
+                .forEach(level -> printMessage(MISSION_HEADER_MESSAGE + level.getName() + COLON_MESSAGE
+                        + String.join(DELIMITER, level.getMissions())));
+        printMessage(LINE_SEPARATOR_MESSAGE);
+        printMessage(COURSE_LEVEL_MISSION_INPUT_MESSAGE);
+        printMessage(COURSE_LEVEL_MISSION_EXAMPLE_MESSAGE);
+    }
+
     private void printMessage(String message) {
         System.out.println(message);
     }
