@@ -1,9 +1,6 @@
 package pairmatching.controller;
 
-import pairmatching.Course;
-import pairmatching.CrewFileReader;
-import pairmatching.FunctionCommand;
-import pairmatching.Level;
+import pairmatching.*;
 import pairmatching.domain.*;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;

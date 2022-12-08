@@ -1,6 +1,7 @@
 package pairmatching.domain;
 
 import pairmatching.Course;
+import pairmatching.Mission;
 
 import java.util.List;
 
