@@ -1,6 +1,7 @@
 package pairmatching.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Pair {
     private List<Crew> crews;
@@ -15,9 +16,14 @@ public class Pair {
     private void validateMatched(List<Crew> crews) {
         for (Crew crew : crews) {
             if (crew.isMatchedCrew(crews, level)) {
-                throw new IllegalArgumentException()
-                        ;
+                throw new IllegalArgumentException();
             }
         }
+    }
+
+    public List<String> getCrewNames() {
+        return crews.stream()
+                .map(Crew::getName)
+                .collect(Collectors.toList());
     }
 }

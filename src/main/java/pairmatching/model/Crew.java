@@ -18,13 +18,16 @@ public class Crew {
 
     public boolean isMatchedCrew(List<Crew> crew, Level level) {
         List<Crew> matchCrews = matchedCrew.getOrDefault(level, new ArrayList<>());
-        crew.remove(this);
         if (matchCrews.containsAll(crew)) {
             return true;
         }
         matchCrews.addAll(crew);
         matchedCrew.put(level, matchCrews);
         return false;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

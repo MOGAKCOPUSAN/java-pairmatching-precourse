@@ -1,5 +1,6 @@
 package pairmatching.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Pairs {
@@ -9,6 +10,10 @@ public class Pairs {
     public Pairs(String mission, List<Pair> pairs) {
         this.mission = mission;
         this.pairs = pairs;
+    }
+
+    public List<Pair> getPairs() {
+        return Collections.unmodifiableList(pairs);
     }
 
     @Override

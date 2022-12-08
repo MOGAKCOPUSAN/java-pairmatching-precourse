@@ -23,6 +23,10 @@ public enum Level {
         return Arrays.stream(Level.values())
                 .filter(level -> level.missions.contains(mission))
                 .findAny()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(()-> new IllegalArgumentException("없는 미션입니다."));
+    }
+
+    public List<String> getMission() {
+        return missions;
     }
 }
