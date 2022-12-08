@@ -5,9 +5,8 @@ import pairmatching.FunctionCommand;
 
 public class InputView {
 
-    public String inputFunctionCommand() {
+    public FunctionCommand inputFunctionCommand() {
         String functionCommand = Console.readLine();
-        FunctionCommand.validateFunctionCommand(functionCommand);
-        return functionCommand;
+        return FunctionCommand.getCommand(functionCommand);
     }
 }

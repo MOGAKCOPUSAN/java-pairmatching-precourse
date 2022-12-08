@@ -14,17 +14,10 @@ public enum FunctionCommand {
         this.key = key;
     }
 
-    public static void validateFunctionCommand(String functionCommand) {
-        if (isWrongFunctionCommand(functionCommand)) {
-            throw new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "기능 커맨드를 제대로 입력해주세요.");
-        }
-    }
-
-    private static boolean isWrongFunctionCommand(String functionCommand) {
-        long matchCount = Arrays.stream(values())
-                .map(value -> value.key)
-                .filter(key -> key.equals(functionCommand))
-                .count();
-        return matchCount == 0;
+    public static FunctionCommand getCommand(String functionCommand) {
+        return Arrays.stream(values())
+                .filter(value -> value.key.equals(functionCommand))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "기능 커맨드를 제대로 입력해주세요."));
     }
 }
