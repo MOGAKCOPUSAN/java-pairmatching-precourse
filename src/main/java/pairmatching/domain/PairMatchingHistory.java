@@ -28,4 +28,16 @@ public class PairMatchingHistory {
                 .orElseThrow(() -> new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "매칭 이력이 없습니다."))
                 .getMatchedPairs();
     }
+
+    public void delete(Program program) {
+        pairMatchingResults.remove(findPairMatchResultByProgram(program));
+    }
+
+    private PairMatchingResult findPairMatchResultByProgram(Program program) {
+        return pairMatchingResults.stream()
+                .filter(pairMatchingResult -> pairMatchingResult.isEqualProgram(program))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorConstants.ERROR_PREFIX
+                        + "찾는 프로그램별 매칭 결과가 없습니다."));
+    }
 }
