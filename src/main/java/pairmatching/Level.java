@@ -15,7 +15,7 @@ public enum Level {
         this.name = name;
     }
 
-    public static Level getCourse(String levelName) {
+    public static Level getLevel(String levelName) {
         return Arrays.stream(values())
                 .filter(value -> value.name.equals(levelName))
                 .findAny()
