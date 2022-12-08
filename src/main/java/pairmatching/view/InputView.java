@@ -25,6 +25,9 @@ public class InputView {
     public static final String COURSE_LEVEL_MISSION_INPUT_MESSAGE = "과정, 레벨, 미션을 선택하세요.";
     public static final String COURSE_LEVEL_MISSION_EXAMPLE_MESSAGE = "ex) 백엔드, 레벨1, 자동차경주";
 
+    public static final String REMATCHING_INPUT_MESSAGE = "매칭 정보가 있습니다. 다시 매칭하시겠습니까?";
+    public static final String REMATCHING_EXAMPLE_MESSAGE = "네 | 아니오";
+
     public String readChoice() {
         printChoiceInputMessage();
 
@@ -57,6 +60,14 @@ public class InputView {
         printMessage(LINE_SEPARATOR_MESSAGE);
         printMessage(COURSE_LEVEL_MISSION_INPUT_MESSAGE);
         printMessage(COURSE_LEVEL_MISSION_EXAMPLE_MESSAGE);
+    }
+
+    public String readRematching() {
+        printMessage(REMATCHING_INPUT_MESSAGE);
+        printMessage(REMATCHING_EXAMPLE_MESSAGE);
+        String rematchingIntention = Console.readLine();
+        InputValidator.checkRematching(rematchingIntention);
+        return rematchingIntention;
     }
 
     private void printMessage(String message) {
