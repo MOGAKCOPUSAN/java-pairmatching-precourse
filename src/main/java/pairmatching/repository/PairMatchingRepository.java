@@ -29,4 +29,8 @@ public class PairMatchingRepository {
     public void clear() {
         matchingResults.clear();
     }
+
+    public boolean hasMatchingCondition(Condition condition) {
+        return matchingResults.containsKey(condition);
+    }
 }
