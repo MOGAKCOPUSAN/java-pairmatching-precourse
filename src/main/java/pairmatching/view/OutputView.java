@@ -17,6 +17,7 @@ public class OutputView {
     private static final String PRINT_FUNCTION_DELIMITER = "#############################################";
     private static final String COURSE_JOIN_DELIMITER = " | ";
     private static final String CHOICE_PROGRAM_MESSAGE = "과정, 레벨, 미션을 선택하세요.";
+    private static final String CHOICE_PROGRAM_EXAMPLE_MESSAGE = "ex) 백엔드, 레벨1, 자동차경주";
     private static final String PAIR_MATCHING_RESULT_MESSAGE = "페어 매칭 결과입니다.";
     private static final String PAIR_REMATCHING_MESSAGE = "매칭 정보가 있습니다. 다시 매칭하시겠습니까?";
     private static final String YES_OR_NO_COMMAND_MESSAGE = "네 | 아니오";
@@ -54,6 +55,7 @@ public class OutputView {
 
     public void printChoiceProgramMessage() {
         printMessage(CHOICE_PROGRAM_MESSAGE);
+        printMessage(CHOICE_PROGRAM_EXAMPLE_MESSAGE);
     }
 
     public void printPairMatchingResultMessage() {
