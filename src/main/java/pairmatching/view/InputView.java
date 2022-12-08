@@ -2,6 +2,7 @@ package pairmatching.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import pairmatching.FunctionCommand;
+import pairmatching.RematchCommand;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,5 +21,10 @@ public class InputView {
         String program = Console.readLine();
         String removeBlankProgram = program.replace(BLANK, "");
         return Arrays.asList(removeBlankProgram.split(PROGRAM_SPLIT_DELIMITER));
+    }
+
+    public RematchCommand inputRematchCommand() {
+        String rematchCommand = Console.readLine();
+        return RematchCommand.getRematchCommand(rematchCommand);
     }
 }
