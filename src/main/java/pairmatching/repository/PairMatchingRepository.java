@@ -25,4 +25,8 @@ public class PairMatchingRepository {
 
         return matchingResults.get(condition);
     }
+
+    public void clear() {
+        matchingResults.clear();
+    }
 }
