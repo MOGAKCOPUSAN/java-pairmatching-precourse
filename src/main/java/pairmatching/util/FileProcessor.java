@@ -6,18 +6,42 @@ import java.util.List;
 
 public class FileProcessor {
 
-    public static List<String> read(String path, String filename) throws IOException {
+    public static List<String> read(String path, String filename) {
         File file = new File(path + filename);
 
-        FileReader fileReader = new FileReader(file);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        BufferedReader bufferedReader = getBufferedReader(file);
 
-        List<String> results = new ArrayList<>();
+        List<String> results = getResults(bufferedReader);
+        return results;
+    }
 
-        String line = "";
-        while( (line = bufferedReader.readLine()) != null ){
-            results.add(line);
+    private static List<String> getResults(BufferedReader bufferedReader) {
+        List<String> results = null;
+        try {
+            results = readFile(bufferedReader);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return results;
+    }
+
+    private static BufferedReader getBufferedReader(File file) {
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return bufferedReader;
+    }
+
+    private static List<String> readFile(BufferedReader bufferedReader) throws IOException {
+        List<String> contents = new ArrayList<>();
+
+        String line = "";
+        while ((line = bufferedReader.readLine()) != null) {
+            contents.add(line);
+        }
+        return contents;
     }
 }
