@@ -16,7 +16,7 @@ public class Pair {
     private void validateMatched(List<Crew> crews) {
         for (Crew crew : crews) {
             if (crew.isMatchedCrew(crews, level)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("이미 매칭된 크루");
             }
         }
     }

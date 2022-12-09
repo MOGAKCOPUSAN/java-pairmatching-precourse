@@ -16,4 +16,8 @@ public class OutputView {
             System.out.println(String.join(" : ",pairName));
         }
     }
+
+    public void printError(String message) {
+        System.out.println("[ERROR] " + message);
+    }
 }
