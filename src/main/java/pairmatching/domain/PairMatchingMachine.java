@@ -31,7 +31,7 @@ public class PairMatchingMachine {
     }
 
     private void generatePairs() {
-        List<Integer> pairMatchingIndexes = IntStream.rangeClosed(0, shuffledCrewNames.size())
+        List<Integer> pairMatchingIndexes = IntStream.rangeClosed(0, shuffledCrewNames.size() - 1)
                 .filter(value -> value % 2 != 0)
                 .boxed()
                 .collect(Collectors.toList());
@@ -46,7 +46,7 @@ public class PairMatchingMachine {
         int lastPairIndex = matchedPairs.size() - 1;
         String beforeLastPair = matchedPairs.get(lastPairIndex);
         int lastCrewIndex = shuffledCrewNames.size() - 1;
-        String finalLastPair = beforeLastPair + shuffledCrewNames.get(lastCrewIndex);
+        String finalLastPair = beforeLastPair + " : " + shuffledCrewNames.get(lastCrewIndex);
         matchedPairs.remove(lastPairIndex);
         matchedPairs.add(finalLastPair);
     }
