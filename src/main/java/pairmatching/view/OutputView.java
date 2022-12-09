@@ -41,7 +41,7 @@ public class OutputView {
     }
 
     public void printProgrammingCourse(List<String> courses) {
-        printMessage(String.join(COURSE_JOIN_DELIMITER, courses));
+        printMessage("과정: " + String.join(COURSE_JOIN_DELIMITER, courses));
     }
 
     public void printMissionByLevel(Map<Level, List<String>> missionByLevel) {
@@ -59,20 +59,25 @@ public class OutputView {
     }
 
     public void printPairMatchingResultMessage() {
+        printBlankLine();
         printMessage(PAIR_MATCHING_RESULT_MESSAGE);
     }
 
     public void printPairMatchingResult(List<String> matchedPairs) {
         matchedPairs.forEach(this::printMessage);
+        printBlankLine();
     }
 
     public void printPairRematchingMessage() {
+        printBlankLine();
         printMessage(PAIR_REMATCHING_MESSAGE);
         printMessage(YES_OR_NO_COMMAND_MESSAGE);
     }
 
     public void printPairInitializeSuccessMessage() {
+        printBlankLine();
         printMessage(PAIR_INITIALIZE_SUCCESS_MESSAGE);
+        printBlankLine();
     }
 
     private void printMessage(String message) {
@@ -81,5 +86,9 @@ public class OutputView {
 
     private void printErrorMessage(String errorMessage) {
         System.out.println(errorMessage);
+    }
+
+    public void printBlankLine() {
+        System.out.println();
     }
 }
