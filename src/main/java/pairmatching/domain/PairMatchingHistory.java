@@ -40,4 +40,8 @@ public class PairMatchingHistory {
                 .orElseThrow(() -> new IllegalArgumentException(ErrorConstants.ERROR_PREFIX
                         + "찾는 프로그램별 매칭 결과가 없습니다."));
     }
+
+    public void initalize() {
+        pairMatchingResults.clear();
+    }
 }
