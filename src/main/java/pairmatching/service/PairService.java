@@ -48,7 +48,7 @@ public class PairService {
     }
 
     public Pairs getPairs(Course course, String mission) {
-        return null;
+        return pairRepository.findByCourseAndMission(course, mission);
     }
 }
 

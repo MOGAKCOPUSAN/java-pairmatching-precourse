@@ -13,6 +13,10 @@ public class PairRepository {
         database.put(PairKey.of(course, mission), pairs);
     }
 
+    public Pairs findByCourseAndMission(Course course, String mission) {
+        return database.get(PairKey.of(course, mission));
+    }
+
     static class PairKey{
         private final Course course;
         private final String mission;
