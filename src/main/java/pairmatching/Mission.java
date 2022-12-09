@@ -43,4 +43,14 @@ public enum Mission {
                 .orElseThrow(() ->
                         new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "정확한 미션 이름을 입력해주세요."));
     }
+
+    public static void validateMission(Level inputLevel, Mission inputMission) {
+        Arrays.stream(values())
+                .filter(mission -> mission.name.equals(inputMission.name))
+                .filter(mission -> mission.level.equals(inputLevel))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        ErrorConstants.ERROR_PREFIX + "레벨에 맞는 미션을 제대로 입력해주세요."));
+
+    }
 }
