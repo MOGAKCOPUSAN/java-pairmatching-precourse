@@ -4,6 +4,7 @@ import pairmatching.domain.program.Course;
 import pairmatching.domain.program.Level;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Crew {
 
@@ -18,12 +19,11 @@ public class Crew {
     }
 
     private void initMatchedCrewsByLevel() {
-        List<Crew> initCrews = new ArrayList<>(Collections.emptyList());
-        matchedCrewsByLevel.put(Level.LEVEL1, initCrews);
-        matchedCrewsByLevel.put(Level.LEVEL2, initCrews);
-        matchedCrewsByLevel.put(Level.LEVEL3, initCrews);
-        matchedCrewsByLevel.put(Level.LEVEL4, initCrews);
-        matchedCrewsByLevel.put(Level.LEVEL5, initCrews);
+        matchedCrewsByLevel.put(Level.LEVEL1, new ArrayList<>(Collections.emptyList()));
+        matchedCrewsByLevel.put(Level.LEVEL2, new ArrayList<>(Collections.emptyList()));
+        matchedCrewsByLevel.put(Level.LEVEL3, new ArrayList<>(Collections.emptyList()));
+        matchedCrewsByLevel.put(Level.LEVEL4, new ArrayList<>(Collections.emptyList()));
+        matchedCrewsByLevel.put(Level.LEVEL5, new ArrayList<>(Collections.emptyList()));
     }
 
     public String getName() {
