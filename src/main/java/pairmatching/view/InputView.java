@@ -2,6 +2,7 @@ package pairmatching.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import pairmatching.model.Course;
 import pairmatching.model.Level;
@@ -17,17 +18,18 @@ public class InputView {
     private static final String DELIMITER = " | ";
     private static final String EXAMPLE_MESSAGE = "과정, 레벨, 미션을 선택하세요.\n"
             + "ex) 백엔드, 레벨1, 자동차경주";
+    private static final String OPTION_REGEX = ", ";
 
     public String readCommand() {
         System.out.println(SELECT_COMMAND_MESSAGE);
         return Console.readLine();
     }
 
-    public String readOption() {
+    public List<String> readOption() {
         printCourse();
         printMissions();
         System.out.println(LINE + EXAMPLE_MESSAGE);
-        return Console.readLine();
+        return Arrays.asList(Console.readLine().split(OPTION_REGEX));
     }
 
     private void printCourse() {

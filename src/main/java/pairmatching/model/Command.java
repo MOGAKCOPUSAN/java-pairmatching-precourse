@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum Command {
     MATCHING("1"),
-    READ("2"),
+    FIND("2"),
     INITIALIZE("3"),
     QUIT("Q");
 
