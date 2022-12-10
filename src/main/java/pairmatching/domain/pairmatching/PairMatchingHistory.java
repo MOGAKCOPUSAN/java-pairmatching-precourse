@@ -1,6 +1,8 @@
-package pairmatching.domain;
+package pairmatching.domain.pairmatching;
 
 import pairmatching.ErrorConstants;
+import pairmatching.domain.program.Level;
+import pairmatching.domain.program.Program;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,12 @@ public class PairMatchingHistory {
 
     public void save(PairMatchingResult pairMatchingResult) {
         pairMatchingResults.add(pairMatchingResult);
+    }
+
+    public long countByLevel(Level level) {
+        return pairMatchingResults.stream()
+                .filter(pairMatchingResult -> pairMatchingResult.getLevel() == level)
+                .count();
     }
 
     public boolean isExists(Program program) {

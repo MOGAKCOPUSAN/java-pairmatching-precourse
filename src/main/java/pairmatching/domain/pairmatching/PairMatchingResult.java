@@ -1,12 +1,10 @@
-package pairmatching.domain;
+package pairmatching.domain.pairmatching;
 
-import pairmatching.Course;
-import pairmatching.Level;
-import pairmatching.Mission;
+import pairmatching.domain.program.Level;
+import pairmatching.domain.program.Program;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class PairMatchingResult {
 
@@ -16,6 +14,10 @@ public class PairMatchingResult {
     public PairMatchingResult(List<String> matchedPairs, Program program) {
         this.matchedPairs = matchedPairs;
         this.program = program;
+    }
+
+    public Level getLevel() {
+        return program.getLevel();
     }
 
     public boolean isEqualProgram(Program program) {
