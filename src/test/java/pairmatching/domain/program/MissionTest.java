@@ -1,6 +1,10 @@
 package pairmatching.domain.program;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import pairmatching.ErrorConstants;
 import pairmatching.domain.program.Level;
 import pairmatching.domain.program.Mission;
 
@@ -10,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MissionTest {
 
@@ -28,5 +33,20 @@ class MissionTest {
         assertThat(missionsByLevel.get(Level.LEVEL3)).isEqualTo(level3Mission);
         assertThat(missionsByLevel.get(Level.LEVEL4)).isEqualTo(level4Mission);
         assertThat(missionsByLevel.get(Level.LEVEL5)).isEqualTo(level5Mission);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"로또1", "자동차게임", "aa"})
+    void 없는_미션을_입력하면_예외_처리(String missionName) {
+        Assertions.assertThatThrownBy(() -> Mission.getMission(missionName))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorConstants.ERROR_PREFIX + "정확한 미션 이름을 입력해주세요.");
+    }
+
+    @Test
+    void 레벨에_맞는_미션이_없으면_예외_처리() {
+        assertThatThrownBy(() -> Mission.validateMission(Level.LEVEL1, Mission.PAYMENT))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorConstants.ERROR_PREFIX + "레벨에 맞는 미션을 제대로 입력해주세요.");
     }
 }
