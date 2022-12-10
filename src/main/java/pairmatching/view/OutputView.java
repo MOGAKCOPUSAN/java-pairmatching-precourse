@@ -1,9 +1,7 @@
 package pairmatching.view;
 
-import pairmatching.Course;
-import pairmatching.Level;
+import pairmatching.domain.program.Level;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -84,8 +82,9 @@ public class OutputView {
         System.out.println(message);
     }
 
-    private void printErrorMessage(String errorMessage) {
+    public void printErrorMessage(String errorMessage) {
         System.out.println(errorMessage);
+        printBlankLine();
     }
 
     public void printBlankLine() {
