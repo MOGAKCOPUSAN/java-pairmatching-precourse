@@ -17,6 +17,6 @@ public enum RematchCommand {
                 .filter(value -> value.key.equals(rematchCommand))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorConstants.ERROR_PREFIX
-                        + "재매치 여부를 제대로 입력해주세요."));
+                        + "재매칭 여부를 제대로 입력해주세요."));
     }
 }
