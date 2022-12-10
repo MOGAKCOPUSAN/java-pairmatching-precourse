@@ -1,116 +1,164 @@
 package pairmatching.controller;
 
 import pairmatching.*;
-import pairmatching.domain.*;
+import pairmatching.domain.program.Course;
+import pairmatching.domain.program.Mission;
+import pairmatching.service.PairMatchingService;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PairMatchingController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private BackendCrews backendCrews;
-    private FrontendCrews frontendCrews;
-    private PairMatchingMachine pairMatchingMachine;
-    private PairMatchingResult pairMatchingResult;
-    private final PairMatchingHistory pairMatchingHistory;
+    private final PairMatchingService pairMatchingService;
 
-    private static final int PROGRAM_COURSE_INDEX = 0;
-    private static final int PROGRAM_LEVEL_INDEX = 1;
-    private static final int PROGRAM_MISSION_INDEX = 2;
+    private static final String GAME_STATUS_INIT = "init";
+    private static final String GAME_STATUS_END = "end";
 
-    private String gameStatus = "start";
-    private FunctionCommand functionCommand;
+    private String gameStatus;
 
-    public PairMatchingController() throws IOException {
+    public PairMatchingController() {
         inputView = new InputView();
         outputView = new OutputView();
-        pairMatchingHistory = new PairMatchingHistory();
-        generateCrewsStep();
+        pairMatchingService = new PairMatchingService();
+        gameStatus = GAME_STATUS_INIT;
     }
 
     public void run() {
-        while (gameStatus.equals("start")) {
-            inputFunctionCommand();
-            choiceFunctionStep();
+        while (!gameStatus.equals(GAME_STATUS_END)) {
+            pairMatchingService.initPairMatchTryCount();
+            FunctionCommand functionCommand = inputFunctionCommand();
+            choiceFunctionStep(functionCommand);
         }
     }
 
-    private void generateCrewsStep() throws IOException {
-        generateBackendCrews();
-        generateFrontendCrews();
+    private FunctionCommand inputFunctionCommand() {
+        try {
+            outputView.printFunctionChoiceMessage();
+            outputView.printFunctionCommand();
+            return inputView.inputFunctionCommand();
+        } catch (IllegalArgumentException exception) {
+            outputView.printErrorMessage(exception.getMessage());
+            return inputFunctionCommand();
+        }
+
     }
 
-    private void generateBackendCrews() throws IOException {
-        List<String> backendCrewNames = CrewFileReader.backendCrewNameFileRead();
-        List<Crew> generatedBackendCrews = backendCrewNames.stream()
-                .map(crewName -> new Crew(Course.BACKEND, crewName))
-                .collect(Collectors.toList());
-        backendCrews = new BackendCrews(generatedBackendCrews);
-    }
-
-    private void generateFrontendCrews() throws IOException {
-        List<String> frontendCrewNames = CrewFileReader.frontendCrewNameFileRead();
-        List<Crew> generatedFrontendCrews = frontendCrewNames.stream()
-                .map(crewName -> new Crew(Course.FRONTEND, crewName))
-                .collect(Collectors.toList());
-        frontendCrews = new FrontendCrews(generatedFrontendCrews);
-    }
-    
-    private void inputFunctionCommand() {
-        outputView.printFunctionCommand();
-        functionCommand = inputView.inputFunctionCommand();
-    }
-
-    private void choiceFunctionStep() {
+    private void choiceFunctionStep(FunctionCommand functionCommand) {
         if (functionCommand.equals(FunctionCommand.PAIR_MATCHING)) {
             printProgram();
-            List<String> program = inputView.inputChoiceProgram();
-            Course course = Course.getCourse(program.get(PROGRAM_COURSE_INDEX));
-            Level level = Level.getLevel(program.get(PROGRAM_LEVEL_INDEX));
-            Mission mission = Mission.getMission(program.get(PROGRAM_MISSION_INDEX));
-            pairMatchingStep(course, mission);
+            pairMatchingStart();
         }
         if (functionCommand.equals(FunctionCommand.PAIR_FIND)) {
-            printProgram();
-            List<String> program = inputView.inputChoiceProgram();
-            Course course = Course.getCourse(program.get(PROGRAM_COURSE_INDEX));
-            Level level = Level.getLevel(program.get(PROGRAM_LEVEL_INDEX));
-            Mission mission = Mission.getMission(program.get(PROGRAM_MISSION_INDEX));
-
+            pairFindStart();
+        }
+        if (functionCommand.equals(FunctionCommand.PAIR_INITIALIZE)) {
+            pairInitializeStart();
+        }
+        if (functionCommand.equals(FunctionCommand.END)) {
+            gameStatus = GAME_STATUS_END;
         }
     }
 
     private void printProgram() {
+        outputView.printBlankLine();
         outputView.printDelimiter();
+        outputView.printProgrammingCourse(Course.getCourseNames());
         outputView.printMissionByLevel(Mission.getMissionByLevel());
         outputView.printDelimiter();
-        outputView.printChoiceProgramMessage();
     }
 
-    private void pairMatchingStep(Course course, Mission mission) {
-        if (course.equals(Course.BACKEND)) {
-            List<String> shuffledCrewNames = ShuffleMachine.getShuffleResult(backendCrews.getNames());
-            pairMatchingMachine = new PairMatchingMachine(shuffledCrewNames, course, mission);
-            pairMatchingMachine.generate();
-            List<String> matchedPairs = pairMatchingMachine.getMatchedPairs();
-            pairMatchResultStep(matchedPairs, course, mission);
+    private void pairMatchingStart() {
+        try {
+            List<String> programInfos = inputProgram();
+            pairMatchingService.generateProgram(programInfos);
+            decidePairRematchOrMatchStep();
+        } catch (IllegalArgumentException exception) {
+            outputView.printErrorMessage(exception.getMessage());
+            pairMatchingStart();
+        }
+    }
+
+    private void decidePairRematchOrMatchStep() {
+        if (pairMatchingService.isResultAlreadyExist()) {
+            pairRematchStep();
+        }
+        if (!pairMatchingService.isResultAlreadyExist()) {
+            pairMatchingStep();
+        }
+    }
+
+    private List<String> inputProgram() {
+        outputView.printChoiceProgramMessage();
+        return inputView.inputChoiceProgram();
+    }
+
+    private void pairRematchStep() {
+        RematchCommand rematchCommand = inputRematchCommand();
+        if (rematchCommand.equals(RematchCommand.YES)) {
+            pairRematchStart();
+        }
+        if (rematchCommand.equals(RematchCommand.NO)) {
+            outputView.printBlankLine();
+            pairMatchingStart();
+        }
+    }
+
+    private RematchCommand inputRematchCommand() {
+        try {
+            outputView.printPairRematchingMessage();
+            RematchCommand rematchCommand = inputView.inputRematchCommand();
+            return rematchCommand;
+        } catch (IllegalArgumentException exception) {
+            outputView.printErrorMessage(exception.getMessage());
+            return inputRematchCommand();
         }
 
     }
 
-    private void pairMatchResultStep(List<String> matchedPairs, Course course, Mission mission) {
-        pairMatchingResult = new PairMatchingResult(matchedPairs, course, mission);
-        outputView.printPairMatchingResultMessage();
-        outputView.printPairMatchingResult(matchedPairs);
-        savePairMatchingResult();
+    private void pairRematchStart() {
+        pairMatchingService.deleteExistResult();
+        pairMatchingStep();
     }
 
-    private void savePairMatchingResult() {
-        pairMatchingHistory.save(pairMatchingResult);
+    private void pairMatchingStep() {
+        try {
+            pairMatchingService.pairMatch();
+            pairMatchResultStep();
+        } catch (IllegalArgumentException exception) {
+            outputView.printErrorMessage(exception.getMessage());
+            pairMatchingStep();
+        } catch (IllegalStateException tryOverException) {
+            outputView.printErrorMessage(tryOverException.getMessage());
+        }
+    }
+
+    private void pairMatchResultStep() {
+        pairMatchingService.generatePairMatchingResult();
+        List<String> matchedPairs = pairMatchingService.getMatchedPairs();
+        outputView.printPairMatchingResultMessage();
+        outputView.printPairMatchingResult(matchedPairs);
+        pairMatchingService.savePairMatchingResult();
+    }
+
+    private void pairInitializeStart() {
+        pairMatchingService.historyInitialize();
+        outputView.printPairInitializeSuccessMessage();
+    }
+
+    private void pairFindStart() {
+        try {
+            printProgram();
+            List<String> programInfos = inputProgram();
+            pairMatchingService.generateProgram(programInfos);
+            outputView.printPairMatchingResultMessage();
+            outputView.printPairMatchingResult(pairMatchingService.findHistory());
+        } catch (IllegalArgumentException exception) {
+            outputView.printErrorMessage(exception.getMessage());
+            inputFunctionCommand();
+        }
     }
 }
