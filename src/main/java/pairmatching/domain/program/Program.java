@@ -1,8 +1,4 @@
-package pairmatching.domain;
-
-import pairmatching.Course;
-import pairmatching.Level;
-import pairmatching.Mission;
+package pairmatching.domain.program;
 
 import java.util.Objects;
 
@@ -16,6 +12,10 @@ public class Program {
         this.course = course;
         this.level = level;
         this.mission = mission;
+    }
+
+    public Level getLevel() {
+        return level;
     }
 
     @Override
