@@ -23,7 +23,14 @@ public enum Level {
         return Arrays.stream(Level.values())
                 .filter(level -> level.missions.contains(mission))
                 .findAny()
-                .orElseThrow(()-> new IllegalArgumentException("없는 미션입니다."));
+                .orElseThrow(() -> new IllegalArgumentException("없는 미션입니다."));
+    }
+
+    public static Level of(String input) {
+        return Arrays.stream(Level.values())
+                .filter(level -> level.name.equals(input))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("없는 레벨입니다"));
     }
 
     public List<String> getMission() {
