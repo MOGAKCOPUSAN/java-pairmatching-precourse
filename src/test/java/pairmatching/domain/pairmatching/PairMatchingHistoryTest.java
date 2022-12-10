@@ -1,17 +1,18 @@
-package pairmatching.domain;
+package pairmatching.domain.pairmatching;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pairmatching.Course;
-import pairmatching.Level;
-import pairmatching.Mission;
+import pairmatching.domain.program.Course;
+import pairmatching.domain.program.Level;
+import pairmatching.domain.program.Mission;
+import pairmatching.domain.pairmatching.PairMatchingHistory;
+import pairmatching.domain.pairmatching.PairMatchingResult;
+import pairmatching.domain.program.Program;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PairMatchingHistoryTest {
 

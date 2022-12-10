@@ -1,8 +1,8 @@
-package pairmatching.domain;
+package pairmatching.domain.program;
 
 import org.junit.jupiter.api.Test;
-import pairmatching.Level;
-import pairmatching.Mission;
+import pairmatching.domain.program.Level;
+import pairmatching.domain.program.Mission;
 
 import java.util.Arrays;
 import java.util.Collections;
