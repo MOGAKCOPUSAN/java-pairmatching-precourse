@@ -1,6 +1,7 @@
 package pairmatching.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Condition {
 
@@ -24,5 +25,25 @@ public class Condition {
 
     public String getMission() {
         return mission;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        Condition condition = (Condition) o;
+        return getCourse().getName().equals(condition.getCourse().getName())
+                && getLevel().getName().equals(condition.getLevel().getName())
+                && Objects.equals(getMission(), condition.getMission());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCourse().getName(), getLevel().getName(), getMission());
     }
 }
