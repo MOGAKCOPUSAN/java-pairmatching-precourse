@@ -23,6 +23,18 @@ public class PairMatchingController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
+    private void start(PairMatchingService pairMatchingService, String choice) {
+        if (choice.equals(PAIR_MATCHING)) {
+            match(pairMatchingService);
+        }
+        if (choice.equals(PAIR_SEARCHING)) {
+            search(pairMatchingService);
+        }
+        if (choice.equals(PAIR_INITIALIZE)) {
+            clear(pairMatchingService);
+        }
+    }
+
     private void match(PairMatchingService pairMatchingService) {
         Condition condition = new Condition(getCondition());
 
