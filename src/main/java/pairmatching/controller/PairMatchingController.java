@@ -23,6 +23,15 @@ public class PairMatchingController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
+    public void run() {
+        PairMatchingService pairMatchingService = new PairMatchingService();
+        String choice;
+        do {
+            choice = getUserChoice();
+            start(pairMatchingService, choice);
+        } while (pairMatchingService.canContinue(choice));
+    }
+
     private void start(PairMatchingService pairMatchingService, String choice) {
         if (choice.equals(PAIR_MATCHING)) {
             match(pairMatchingService);
