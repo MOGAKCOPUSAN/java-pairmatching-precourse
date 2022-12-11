@@ -66,4 +66,8 @@ public class PairMatchingService {
     public boolean hasMatchingResult(Condition condition) {
         return pairMatchingRepository.hasMatchingCondition(condition);
     }
+
+    public boolean canContinue(String choice) {
+        return !choice.equals(QUIT);
+    }
 }
