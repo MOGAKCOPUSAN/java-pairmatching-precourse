@@ -23,6 +23,17 @@ public class PairMatchingController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
+    private void clear(PairMatchingService pairMatchingService) {
+        pairMatchingService.clear();
+    }
+
+    private List<String> getCrews(Course course) {
+        if (course.equals(Course.BACKEND)) {
+            return FileProcessor.read(FILE_PATH, BACKEND_FILE);
+        }
+        return FileProcessor.read(FILE_PATH, FRONTEND_FILE);
+    }
+
     private List<String> getCondition() {
         try {
             List<String> input = inputView.readCourseAndLevelAndMission();
