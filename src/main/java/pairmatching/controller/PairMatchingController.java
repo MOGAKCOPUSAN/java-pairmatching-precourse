@@ -22,4 +22,32 @@ public class PairMatchingController {
 
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
+
+    private List<String> getCondition() {
+        try {
+            List<String> input = inputView.readCourseAndLevelAndMission();
+            return input;
+        } catch (IllegalArgumentException e) {
+            Log.error(e.getMessage());
+            return getCondition();
+        }
+    }
+
+    private String getRematching() {
+        try{
+            return inputView.readRematching();
+        } catch (IllegalArgumentException e) {
+            Log.error(e.getMessage());
+            return getRematching();
+        }
+    }
+
+    private String getUserChoice() {
+        try {
+            return inputView.readChoice();
+        } catch (IllegalArgumentException e) {
+            Log.error(e.getMessage());
+            return getUserChoice();
+        }
+    }
 }
