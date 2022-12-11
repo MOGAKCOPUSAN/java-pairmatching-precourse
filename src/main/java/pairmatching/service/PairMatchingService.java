@@ -58,4 +58,12 @@ public class PairMatchingService {
     public Set<Pair> search(Condition condition) {
         return pairMatchingRepository.findByCondition(condition);
     }
+
+    public void clear() {
+        pairMatchingRepository.clear();
+    }
+
+    public boolean hasMatchingResult(Condition condition) {
+        return pairMatchingRepository.hasMatchingCondition(condition);
+    }
 }
