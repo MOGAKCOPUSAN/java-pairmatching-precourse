@@ -54,4 +54,8 @@ public class PairMatchingService {
     private List<String> getShuffledCrews(List<String> crews) {
         return Randoms.shuffle(crews);
     }
+
+    public Set<Pair> search(Condition condition) {
+        return pairMatchingRepository.findByCondition(condition);
+    }
 }
