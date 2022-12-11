@@ -38,4 +38,20 @@ public class PairMatchingService {
         }
         return pairs;
     }
+
+    private Set<Pair> getOddCrews(List<String> crews) {
+        Set<Pair> pairs = new LinkedHashSet<>();
+        for (int i = 0; i < crews.size(); i += PAIR_SIZE) {
+            if (i == crews.size() - 3) {
+                pairs.add(new Pair(crews.subList(i, i + PAIR_SIZE + 1)));
+                break;
+            }
+            pairs.add(new Pair(crews.subList(i, i + PAIR_SIZE)));
+        }
+        return pairs;
+    }
+
+    private List<String> getShuffledCrews(List<String> crews) {
+        return Randoms.shuffle(crews);
+    }
 }
