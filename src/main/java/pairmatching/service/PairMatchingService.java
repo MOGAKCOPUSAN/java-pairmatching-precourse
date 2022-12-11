@@ -4,10 +4,8 @@ import camp.nextstep.edu.missionutils.Randoms;
 import pairmatching.domain.Condition;
 import pairmatching.domain.Pair;
 import pairmatching.repository.PairMatchingRepository;
-import pairmatching.repository.PairRepository;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class PairMatchingService {
 
@@ -33,22 +31,26 @@ public class PairMatchingService {
 
     private Set<Pair> getEvenCrews(List<String> crews) {
         Set<Pair> pairs = new LinkedHashSet<>();
-        for (int i = 0; i < crews.size(); i += PAIR_SIZE) {
-            pairs.add(new Pair(crews.subList(i, i + PAIR_SIZE)));
+        for (int index = 0; index < crews.size(); index += PAIR_SIZE) {
+            pairs.add(new Pair(crews.subList(index, index + PAIR_SIZE)));
         }
         return pairs;
     }
 
     private Set<Pair> getOddCrews(List<String> crews) {
         Set<Pair> pairs = new LinkedHashSet<>();
-        for (int i = 0; i < crews.size(); i += PAIR_SIZE) {
-            if (i == crews.size() - 3) {
-                pairs.add(new Pair(crews.subList(i, i + PAIR_SIZE + 1)));
+        for (int index = 0; index < crews.size(); index += PAIR_SIZE) {
+            if (isLastIndexInOddCrews(crews, index)) {
+                pairs.add(new Pair(crews.subList(index, index + PAIR_SIZE + 1)));
                 break;
             }
-            pairs.add(new Pair(crews.subList(i, i + PAIR_SIZE)));
+            pairs.add(new Pair(crews.subList(index, index + PAIR_SIZE)));
         }
         return pairs;
+    }
+
+    private boolean isLastIndexInOddCrews(List<String> crews, int index) {
+        return index == crews.size() - 3;
     }
 
     private List<String> getShuffledCrews(List<String> crews) {
