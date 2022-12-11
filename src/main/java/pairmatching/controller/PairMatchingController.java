@@ -23,6 +23,20 @@ public class PairMatchingController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
+    private boolean checkDuplication(PairMatchingService pairMatchingService, Condition condition) {
+        if (pairMatchingService.hasMatchingResult(condition)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasNotRematchingIntention() {
+        if (getRematching().equals(NO_REMATCHING)) {
+            return true;
+        }
+        return false;
+    }
+
     private void search(PairMatchingService pairMatchingService) {
         try {
             outputView.showMatchingResult(pairMatchingService.search(new Condition(getCondition())));
@@ -53,7 +67,7 @@ public class PairMatchingController {
     }
 
     private String getRematching() {
-        try{
+        try {
             return inputView.readRematching();
         } catch (IllegalArgumentException e) {
             Log.error(e.getMessage());
