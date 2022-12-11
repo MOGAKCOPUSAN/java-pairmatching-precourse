@@ -23,6 +23,14 @@ public class PairMatchingController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
+    private void search(PairMatchingService pairMatchingService) {
+        try {
+            outputView.showMatchingResult(pairMatchingService.search(new Condition(getCondition())));
+        } catch (IllegalArgumentException e) {
+            Log.error(e.getMessage());
+        }
+    }
+
     private void clear(PairMatchingService pairMatchingService) {
         pairMatchingService.clear();
     }
