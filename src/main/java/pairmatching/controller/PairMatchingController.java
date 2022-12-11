@@ -23,6 +23,16 @@ public class PairMatchingController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
+    private void match(PairMatchingService pairMatchingService) {
+        Condition condition = new Condition(getCondition());
+
+        if (checkDuplication(pairMatchingService, condition) && hasNotRematchingIntention()) {
+            return;
+        }
+        Set<Pair> pairs = pairMatchingService.match(condition, getCrews(condition.getCourse()));
+        outputView.showMatchingResult(pairs);
+    }
+
     private boolean checkDuplication(PairMatchingService pairMatchingService, Condition condition) {
         if (pairMatchingService.hasMatchingResult(condition)) {
             return true;
